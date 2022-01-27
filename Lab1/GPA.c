@@ -29,14 +29,16 @@ int main(int argc, char *argv[])
         {
 
             data.old = 0;
-            data.in_grade = argv[i][0]; //Assign the first Value of grade 
-            data.sign = argv[i][1]; 
-            
+            data.in_grade = argv[i][0]; //Assign the first Value of grade
+            data.sign = argv[i][1];
+
             if (strcmp(argv[i], "D-") == 0)
             {
                 printf("Grade for the subject %d is %s, invalid\n", i, argv[i]);
                 data.in_gp = 0.0;
-            }else{
+            }
+            else
+            {
                 validSubject++;
                 data.in_gp = pastSystem(data);
                 printf("Grade for the subject %d is %s, GP %3.1f\n", i, argv[i], data.in_gp);
@@ -45,7 +47,15 @@ int main(int argc, char *argv[])
             data.sum_gp += data.in_gp;
         }
 
-        printf("Your GPA for %d valid subjects is %5.2f\n", validSubject, data.sum_gp / validSubject);
+        if (validSubject == 0)
+        {
+            printf("Your GPA for %d valid subjects is 0", validSubject);
+        }
+        else
+        {
+            printf("Your GPA for %d valid subjects is %5.2f\n", validSubject, data.sum_gp / validSubject);
+        }
+
         data.sum_gp = 0;
         validSubject = 0;
 
@@ -73,7 +83,14 @@ int main(int argc, char *argv[])
             data.sum_gp += data.in_gp;
         }
 
-        printf("Your GPA for %d valid subjects is %5.2f\n", validSubject, data.sum_gp / validSubject);
+        if (validSubject == 0)
+        {
+            printf("Your GPA for %d valid subjects is 0", validSubject);
+        }
+        else
+        {
+            printf("Your GPA for %d valid subjects is %5.2f\n", validSubject, data.sum_gp / validSubject);
+        }
     }
     else
     {
@@ -108,25 +125,27 @@ float pastSystem(struct gpaData data)
     }
     if (data.old == 1)
     {
-        if (data.sign == '+'){
+        if (data.sign == '+')
+        {
             data.in_gp += 0.5;
         }
-           
-        if (data.sign == '-'){
+
+        if (data.sign == '-')
+        {
             data.in_gp -= 0.5;
         }
-            
     }
     else
     {
-        if (data.sign == '+'){
+        if (data.sign == '+')
+        {
             data.in_gp += 0.3;
         }
-           
-        if (data.sign == '-'){
+
+        if (data.sign == '-')
+        {
             data.in_gp -= 0.3;
         }
-            
     }
 
     return data.in_gp;
