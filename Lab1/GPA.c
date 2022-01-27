@@ -29,8 +29,8 @@ int main(int argc, char *argv[])
         {
 
             data.old = 0;
-            data.in_grade = argv[i][0];
-            data.sign = argv[i][1];
+            data.in_grade = argv[i][0]; //Assign the first Value of grade 
+            data.sign = argv[i][1]; 
 
             validSubject++;
             data.in_gp = pastSystem(data);
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
         {
 
             data.old = 1;
-            data.in_grade = argv[i][0];
+            data.in_grade = argv[i][0]; // get the first character
             data.sign = argv[i][1];
 
             if (strcmp(argv[i], "A-") == 0 || strcmp(argv[i], "B-") == 0 ||
