@@ -129,11 +129,6 @@ float pastSystem(struct gpaData data)
         {
             data.in_gp += 0.5;
         }
-
-        if (data.sign == '-')
-        {
-            data.in_gp -= 0.5;
-        }
     }
     else
     {
