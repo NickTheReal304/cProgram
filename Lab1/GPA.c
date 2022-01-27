@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
         printf("Your GPA for %d valid subjects is %5.2f\n", validSubject, data.sum_gp / validSubject);
         data.sum_gp = 0;
         validSubject = 0;
-        
+
         printf("Past System:\n");
         for (int i = 1; i <= argc - 1; i++)
         {
@@ -108,17 +108,25 @@ float pastSystem(struct gpaData data)
     }
     if (data.old == 1)
     {
-        if (data.sign == '+')
+        if (data.sign == '+'){
             data.in_gp += 0.5;
-        if (data.sign == '-')
+        }
+           
+        if (data.sign == '-'){
             data.in_gp -= 0.5;
+        }
+            
     }
     else
     {
-        if (data.sign == '+')
+        if (data.sign == '+'){
             data.in_gp += 0.3;
-        if (data.sign == '-')
+        }
+           
+        if (data.sign == '-'){
             data.in_gp -= 0.3;
+        }
+            
     }
 
     return data.in_gp;
