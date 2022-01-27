@@ -31,13 +31,20 @@ int main(int argc, char *argv[])
             data.old = 0;
             data.in_grade = argv[i][0]; //Assign the first Value of grade 
             data.sign = argv[i][1]; 
-
-            validSubject++;
-            data.in_gp = pastSystem(data);
-            printf("Grade for the subject %d is %s, GP %3.1f\n", i, argv[i], data.in_gp);
+            
+            if (strcmp(argv[i], "D-") == 0)
+            {
+                printf("Grade for the subject %d is %s, invalid\n", i, argv[i]);
+                data.in_gp = 0.0;
+            }else{
+                validSubject++;
+                data.in_gp = pastSystem(data);
+                printf("Grade for the subject %d is %s, GP %3.1f\n", i, argv[i], data.in_gp);
+            }
 
             data.sum_gp += data.in_gp;
         }
+        
         printf("Your GPA for %d valid subjects is %5.2f\n", validSubject, data.sum_gp / validSubject);
         data.sum_gp = 0;
 
