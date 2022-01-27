@@ -1,7 +1,7 @@
 // lab 1C: please fix the program
 #include <stdio.h>
 #include <stdlib.h>
-#include<string.h> 
+#include<string.h>   
 #include <stdbool.h>
 
 struct gpaData
