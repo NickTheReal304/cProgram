@@ -1,6 +1,6 @@
 # C program Lab 1
 
-# **Objective**
+## **Objective**
 
 This mainstream GPA system was only adopted by PolyU since 2020/21 sem 1. There was an older GPA
 system adopted for 2019/20 sem 3 or before, which was very special in the presence of plus-grades and
