@@ -44,10 +44,11 @@ int main(int argc, char *argv[])
 
             data.sum_gp += data.in_gp;
         }
-        
+
         printf("Your GPA for %d valid subjects is %5.2f\n", validSubject, data.sum_gp / validSubject);
         data.sum_gp = 0;
-
+        validSubject = 0;
+        
         printf("Past System:\n");
         for (int i = 1; i <= argc - 1; i++)
         {
