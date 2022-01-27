@@ -19,4 +19,4 @@ gcc sources.c -o filename
 ```
 2. Run
 ```
-.\filename A+ B- 
+./filename A+ B- 
