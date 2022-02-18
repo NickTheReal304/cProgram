@@ -13,9 +13,10 @@ while read -r p1 p2; do
 done < $1
 
 declare -i NumberOfTeams=${#scTeam[@]}
+declare -p bcTeam
 
 echo Mini-league with $NumberOfTeams teams
-echo Rank Team G W D L Point GF GA GD
+printf '%s\n' "Rank Team G W D L Point GF GA GD"
 
 homeTeam=()
 awayTeam=()
@@ -36,30 +37,75 @@ for ((i=0; i<$s; i++)); do
 done
 
 declare -i records=${#homeTeam[@]}
-declare -p homeMark
+#declare -p homeMark
+
 #Note that
 #The winning team will score 3 points, the losing team will score 0 point.
 #If the game ends up with a draw, both teams will score 1 point. 
 #Rank
-for ((j=0; j<$NumberOfTeams; j++));do
-  echo --------------
-  #echo $j
-  echo ${bcTeam[$j]}
+#construct a matrix
 
+
+
+
+
+for ((j=0; j<$NumberOfTeams; j++));do
+  #echo --------------
+  #echo $j
+  #echo ${bcTeam[$j]}
+  #eval "declare -a a$j=( $(for m in {0..7}; do echo 0; done) )"
+  
+  let game=0
   let win=0
   let point=0
-
+  let lose=0
+  let draw=0
+  let goalFor=0
+  let goalAgainst=0
+  
   for ((k=0; k<$records; k++)); do
-      
-      if [ "${scTeam[$j]}" == "${homeTeam[$k]}" ] &&
-         [ "${homeMark[$k]}" \> "${awayMark[$k]}" ]; then
+      #----------
+      if [ "${scTeam[$j]}" == "${homeTeam[$k]}" ]; then
+        ((game++))
+        ((goalFor+=$((${homeMark[$k]}))))
+        ((goalAgainst+=$((${awayMark[$k]}))))
+        if [ "${homeMark[$k]}" \> "${awayMark[$k]}" ]; then
           ((win++))
-      elif [ "${scTeam[$j]}" == "${awayTeam[$k]}" ] &&
-           [ "${awayMark[$k]}" \> "${homeMark[$k]}" ]; then
-          ((win++))
-      else
-        echo 
+          ((point+=3))
+        elif [ "${homeMark[$k]}" == "${awayMark[$k]}" ]; then
+          ((draw++))
+          ((point++))
+        else
+          ((lose++))
+        fi
+      #----------
+      elif [ "${scTeam[$j]}" == "${awayTeam[$k]}" ]; then
+          ((game++))
+          ((goalFor+=$((${awayMark[$k]}))))
+          ((goalAgainst+=$((${homeMark[$k]}))))
+          if [ "${awayMark[$k]}" \> "${homeMark[$k]}" ]; then
+            ((win++))
+            ((point+=3))
+          elif [ "${awayMark[$k]}" == "${homeMark[$k]}" ]; then
+            ((draw++))
+            ((point++))
+          else
+            ((lose++))
+          fi
       fi
   done
-  echo ${bcTeam[j]} $win 
+  let goalDifference=$(($goalFor - $goalAgainst))
+
+  eval "declare -a a$j=( $(for m in {0}; do echo ${bcTeam[j]} $game $win $draw $lose $point $goalFor $goalAgainst $goalDifference; done) )"
+  
 done
+
+for ((n=0; n<$NumberOfTeams; n++)); do 
+  #printf '%s' "$n "
+  var=a$n[@]
+  echo ${!var} 
+done | (sort -rn -k6 | nl)
+
+ 
+
+
