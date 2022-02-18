@@ -10,7 +10,7 @@ different days or weeks, as indicated by the prefix of those files specified as 
 score2122. This concept of a mini-league is useful for some common tie-breaking rules.
 
 |Filename       |Content                                            |
-|---------------|--------------------------------------------------:|
+|---------------|---------------------------------------------------|
 |Top4.dat       |ARS Arsenal                                        |
 |               |CHE Chelsea                                        |
 |               |LIV Liverpool                                      |
