@@ -16,11 +16,9 @@ score2122. This concept of a mini-league is useful for some common tie-breaking 
 |               |LIV Liverpool                                      |
 |               |MUN ManchesterUnited                               |
 |               |                                                   |
-|---------------|---------------------------------------------------|
 |score21220101  |LIV 1 CHE 1                                        |
 |               |MUN 1 ARS 2                                        |
 |               |                                                   |
-|---------------|---------------------------------------------------|
 |score21220102  |MUN 0 LIV 5                                        |
 |               |ARS 0 CHE 2                                        |
 
