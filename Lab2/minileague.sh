@@ -116,10 +116,10 @@ for ((j=0; j<$records; j++)); do
   currentHostTeam=()
   currentAwayTeam=()
   #Assign the numberOfPreviousTeams with the index of array
-  declare -i numberOfPerviousTeams=${#previuosHostTeam[@]}
+  declare -i numberOfPreviousTeams=${#previuosHostTeam[@]}
   
   #Check if the record alreadyExist or not
-  for ((i=0; i<$numberOfPerviousTeams; i++)); do
+  for ((i=0; i<$numberOfPreviousTeams; i++)); do
     #If the record alreadt exist, the boolean will be 0 --> 1
     if [[ "${previuosHostTeam[$i]}" == "${homeTeam[$j]}" ]]; then
       alreadyExist=1
