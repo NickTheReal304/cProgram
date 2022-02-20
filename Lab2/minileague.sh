@@ -1,6 +1,9 @@
 #Declear /bin/bash
 #!/bin/bash
 
+#Reminder: Please this file to be excutuble ... e.g: chomd 
+
+
 #Read the file by the preflix style
 array=($(ls | grep "^$2"))
 
@@ -100,3 +103,52 @@ for ((n=0; n<$NumberOfTeams; n++)); do
   echo ${!var} 
 #Doing the sorting by selected the col-6, which team point
 done | (sort -rn -k6 | nl) #'nl' is use for assgin 1,2,3... to the sorted record 
+
+previuosHostTeam=()
+
+#Checking the anomely
+for ((j=0; j<$records; j++)); do 
+  #Declare some variable use for the checking
+  let counter=0
+  let hostCounter=0
+  let alreadyExist=0
+  #array type
+  currentHostTeam=()
+  currentAwayTeam=()
+  #Assign the numberOfPreviousTeams with the index of array
+  declare -i numberOfPerviousTeams=${#previuosHostTeam[@]}
+  
+  #Check if the record alreadyExist or not
+  for ((i=0; i<$numberOfPerviousTeams; i++)); do
+    #If the record alreadt exist, the boolean will be 0 --> 1
+    if [[ "${previuosHostTeam[$i]}" == "${homeTeam[$j]}" ]]; then
+      alreadyExist=1
+    elif [ "${previuosHostTeam[$i]}" == "${awayTeam[$j]}" ]; then
+      alreadyExist=1
+    fi
+  done
+
+  #If exist, then end the loop for the repeat record
+  if [ "${alreadyExist}" == 1 ]; then
+    break
+  fi
+  
+  #If not exist then loop through the record again... and find the same record...
+  for ((k=0; k<$records; k++)); do
+    if [[ "${homeTeam[$j]}" == "${homeTeam[$k]}" && "${awayTeam[$j]}" == "${awayTeam[$k]}" ]]; then
+      ((hostCounter++))
+      currentHomeTeam=${homeTeam[$k]}
+      currentAwayTeam=${awayTeam[$k]}
+      ((counter++))
+    elif [ "${homeTeam[$j]}" == "${awayTeam[$k]}" -a "${awayTeam[$j]}" == "${homeTeam[$k]}" ]; then
+      ((counter++))
+    fi
+  done
+  #If the record really indicated that the record already bigger then three.. then print it
+  if [ "${counter}" \> 2 ]; then
+    echo according to the records, there are duplicate records ...
+    printf '%s %s\n' "${homeTeam[j]} is ready playing ${currentAwayTeam} three times"
+    previuosHostTeam+=(${homeTeam[j]})
+  fi
+
+done
